@@ -3,9 +3,12 @@ package com.example.mysafety;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,7 +29,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyGallery extends AppCompatActivity {
+public class MyGallery extends AppCompatActivity implements DisplayImage.OnFragmentInteractionListener {
 
     GridView gridView;
     FirebaseStorage firebaseStorage;
@@ -80,6 +83,28 @@ public class MyGallery extends AppCompatActivity {
                 String path=imageAdapter.getItem(position);
                 buildDialog(path);
                 return true;
+            }
+        });
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String path=imageAdapter.getItem(position);
+
+                Bundle bundle=new Bundle();
+                bundle.putString("path",path);
+
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                DisplayImage displayImage=new DisplayImage();
+                displayImage.setArguments(bundle);
+
+                gridView.setVisibility(View.GONE);
+
+                fragmentTransaction.add(R.id.mygalleryview,displayImage);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
     }
@@ -137,5 +162,21 @@ public class MyGallery extends AppCompatActivity {
                     Log.w("TAG", "Error deleting document", e);
                 }
             });
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onBackPressed(){
+        int fragments=getSupportFragmentManager().getBackStackEntryCount();
+        if(fragments==1){
+            getSupportFragmentManager().popBackStack();
+            gridView.setVisibility(View.VISIBLE);
+        }
+        else
+            super.onBackPressed();
     }
 }

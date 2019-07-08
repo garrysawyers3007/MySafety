@@ -11,4 +11,6 @@
     <string name="complaint">Complaints</string>
     <string name="Complaint">No Complaints</string>
     <string name="no_images_to_show">No Images to show</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

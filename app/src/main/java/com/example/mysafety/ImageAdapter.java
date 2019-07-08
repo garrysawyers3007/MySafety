@@ -22,7 +22,7 @@ import java.util.List;
 
 class ImageAdapter extends ArrayAdapter<String> {
 
-    Context context;
+    private Context context;
 
     public ImageAdapter(@NonNull Context context, List<String> objects) {
         super(context,0, objects);
@@ -40,9 +40,6 @@ class ImageAdapter extends ArrayAdapter<String> {
 
         String path=getItem(position);
         final ImageView imageView=listitemview.findViewById(R.id.imageview);
-
-        TextView textView=listitemview.findViewById(R.id.label);
-        textView.setText("Photo:"+(position+1));
 
 
         FirebaseStorage firebaseStorage=FirebaseStorage.getInstance();

@@ -2,7 +2,10 @@ package com.example.mysafety;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,14 +29,13 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Gallery extends AppCompatActivity {
+public class Gallery extends AppCompatActivity implements DisplayImage.OnFragmentInteractionListener {
 
     GridView gridView;
     FirebaseStorage firebaseStorage;
     FirebaseFirestore db;
     TextView NoImage;
     ImageAdapter imageAdapter;
-    SearchView searchView;
     List<String> images;
 
 
@@ -49,7 +51,7 @@ public class Gallery extends AppCompatActivity {
         NoImage.setVisibility(View.GONE);
 
         gridView=findViewById(R.id.gridview);
-        searchView=findViewById(R.id.searchView);
+        gridView.setVisibility(View.VISIBLE);
 
 
         db.collection("Images").get()
@@ -75,16 +77,42 @@ public class Gallery extends AppCompatActivity {
             }
         });
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String path=imageAdapter.getItem(position);
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
+                Bundle bundle=new Bundle();
+                bundle.putString("path",path);
+
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                DisplayImage displayImage=new DisplayImage();
+                displayImage.setArguments(bundle);
+
+                gridView.setVisibility(View.GONE);
+
+                fragmentTransaction.add(R.id.galleryview,displayImage);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
+
+    }
+
+    @Override
+    public void onBackPressed(){
+        int fragments=getSupportFragmentManager().getBackStackEntryCount();
+        if(fragments==1){
+            getSupportFragmentManager().popBackStack();
+            gridView.setVisibility(View.VISIBLE);
+        }
+        else
+            super.onBackPressed();
+    }
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
