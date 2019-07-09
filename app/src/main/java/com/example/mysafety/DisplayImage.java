@@ -10,9 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -85,6 +88,19 @@ public class DisplayImage extends Fragment {
                         Glide.with(getContext())
                                 .load(url)
                                 .into(imageView);
+                    }
+                });
+
+        String pathref=path.substring(0,path.lastIndexOf(' '));
+
+        final TextView Label=view.findViewById(R.id.labeltext);
+
+        FirebaseFirestore db=FirebaseFirestore.getInstance();
+        db.collection("Images").document(pathref).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        Label.setText(documentSnapshot.getString("Label"));
                     }
                 });
 

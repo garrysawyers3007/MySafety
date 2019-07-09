@@ -55,6 +55,7 @@ public class SpeechtoText extends AppCompatActivity {
     FirebaseFirestore db;
     FirebaseStorage firebaseStorage;
     String department;
+    EditText label;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -288,19 +289,34 @@ public class SpeechtoText extends AppCompatActivity {
 
     }
 
-    public void addPhoto(String url,String finaldate){
+    public void addPhoto(final String url,final String finaldate){
 
         SharedPreferences sharedPreferences=this.getSharedPreferences("Userdetails",MODE_PRIVATE);
-        String user=sharedPreferences.getString("User","");
+        final String user=sharedPreferences.getString("User","");
 
-        Map<String,Object> details=new HashMap<>();
-        details.put("Image",url.trim());
-        details.put("User",user);
-        details.put("Time",finaldate);
+        label = new EditText(SpeechtoText.this);
+        label.setHint("Enter Label");
 
-        db.collection("Images").document(finaldate)
-                .set(details,SetOptions.merge());
+        AlertDialog.Builder alert=new AlertDialog.Builder(SpeechtoText.this);
+        alert.setTitle("Label");
+        alert.setView(label);
 
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Map<String,Object> details=new HashMap<>();
+                details.put("Image",url.trim());
+                details.put("User",user);
+                details.put("Time",finaldate);
+                details.put("Label",label.getText().toString().trim());
+
+                db.collection("Images").document(finaldate)
+                        .set(details,SetOptions.merge());
+            }
+        });
+
+        alert.show();
+        return;
     }
 
     public void Takepicture() {
@@ -315,6 +331,7 @@ public class SpeechtoText extends AppCompatActivity {
         else
             Toast.makeText(this,"Camera unavailable",Toast.LENGTH_SHORT).show();
     }
+
 
     private Uri getImageUri(Context context, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
