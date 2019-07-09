@@ -13,11 +13,13 @@
             android:layout_alignParentStart="true"
             android:textSize="15sp"
             android:layout_marginLeft="4dp"
+            android:textColor="@color/bg_gradient_start"
             android:id="@+id/user" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:textColor="@color/bg_gradient_start"
             android:layout_marginRight="4dp"
             android:id="@+id/date" />
     </RelativeLayout>
@@ -27,6 +29,7 @@
         android:paddingLeft="4dp"
         android:layout_marginTop="6dp"
         android:id="@+id/complaint"
+        android:textColor="@color/bg_gradient_start"
         android:textSize="24sp"/>
 
 </LinearLayout>

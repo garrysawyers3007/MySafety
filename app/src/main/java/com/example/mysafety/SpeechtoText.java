@@ -300,6 +300,7 @@ public class SpeechtoText extends AppCompatActivity {
         AlertDialog.Builder alert=new AlertDialog.Builder(SpeechtoText.this);
         alert.setTitle("Label");
         alert.setView(label);
+        alert.setCancelable(false);
 
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override

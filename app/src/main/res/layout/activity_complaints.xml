@@ -10,8 +10,8 @@
         android:layout_height="wrap_content"
         app:tabMode="scrollable"
         android:background="@color/splashbackground"
-        app:tabTextColor="@color/cardview_light_background"
-        app:tabIndicatorColor="@color/cardview_light_background"/>
+        app:tabTextColor="@color/bg_gradient_start"
+        app:tabIndicatorColor="@color/bg_gradient_start"/>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"

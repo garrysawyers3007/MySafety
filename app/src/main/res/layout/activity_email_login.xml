@@ -27,6 +27,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="4dp"
             android:text="Username"
+            android:textColor="#000000"
             android:textSize="20sp"/>
 
         <EditText
@@ -36,11 +37,13 @@
             android:layout_gravity="center"
             android:inputType="none"
             android:hint="Enter Username"
+            android:textCursorDrawable="@null"
             android:maxLines="1" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Password"
+            android:textColor="#000000"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="4dp"
@@ -52,12 +55,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:hint="Enter password"
+            android:textCursorDrawable="@null"
             android:inputType="textPassword" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Login"
+            android:background="@drawable/roundcorner"
             android:layout_marginTop="8dp"
             android:id="@+id/login2"/>
         <TextView
@@ -70,7 +75,6 @@
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="4dp"
             android:textSize="15sp"/>
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

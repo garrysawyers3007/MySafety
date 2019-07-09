@@ -6,62 +6,74 @@
     android:layout_height="match_parent"
     tools:context=".MainPage">
 
-    <Button
-        android:id="@+id/regcomp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="204dp"
-        android:layout_marginEnd="8dp"
-        android:text="Register Complaint"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/mycomplaints"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_width="360dp"
+        android:layout_height="360dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="My Complaints"
-        app:layout_constraintBottom_toTopOf="@+id/signout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regcomp"
-        app:layout_constraintVertical_bias="0.241" />
-
-    <Button
-        android:id="@+id/signout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Signout"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regcomp"
-        app:layout_constraintVertical_bias="0.436" />
-
-    <Button
+        app:layout_constraintTop_toTopOf="parent">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="My Uploads"
-        android:id="@+id/myuploads"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/signout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mycomplaints" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#000000"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/regcomp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_margin="1dp"
+            android:background="#FFFFFF"
+            android:drawableTop="@drawable/ic_complaint"
+            android:layout_height="match_parent"
+            android:text="Register Complaint" />
+
+        <Button
+            android:id="@+id/mycomplaints"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_margin="1dp"
+            android:background="#FFFFFF"
+            android:layout_height="match_parent"
+            android:drawableTop="@drawable/ic_chat"
+            android:text="My Complaints" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#000000"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/myuploads"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_margin="1dp"
+            android:background="#FFFFFF"
+            android:layout_height="match_parent"
+            android:drawableTop="@drawable/ic_gallery"
+            android:text="My Uploads" />
+
+        <Button
+            android:id="@+id/signout"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:layout_margin="1dp"
+            android:drawableTop="@drawable/ic_login"
+            android:layout_height="match_parent"
+            android:text="Signout" />
+    </LinearLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

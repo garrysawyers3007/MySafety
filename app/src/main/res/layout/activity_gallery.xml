@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/error"
         android:textSize="30sp"
+        android:textColor="@color/bg_gradient_start"
         android:text="@string/no_images_to_show"/>
     <GridView
         android:id="@+id/gridview"

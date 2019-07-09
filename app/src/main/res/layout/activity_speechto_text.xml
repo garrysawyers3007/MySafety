@@ -18,6 +18,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#ffde03"
         android:text="Next"
         android:layout_marginLeft="150dp"
         android:id="@+id/next"
@@ -36,6 +37,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:id="@+id/photo"
+            android:background="@drawable/roundcorner"
             android:text="Take Photo"/>
         <LinearLayout
             android:layout_width="0dp"
@@ -60,13 +62,14 @@
             android:layout_marginTop="10dp"
             android:text="@string/tap_on_mic"
             android:textColor="@color/bg_gradient_start"
-            android:textSize="15dp"
+            android:textSize="13sp"
             android:textStyle="normal" />
         </LinearLayout>
         <Button
             android:layout_width="0dp"
             android:layout_weight="1"
             android:id="@+id/gallery"
+            android:background="@drawable/roundcorner"
             android:layout_height="wrap_content"
             android:text="Choose from gallery"/>
 

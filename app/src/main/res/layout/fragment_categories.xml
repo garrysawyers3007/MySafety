@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/nocomplaints"
         android:textSize="30sp"
+        android:textColor="@color/bg_gradient_start"
         android:text="@string/Complaint"/>
     <ListView
         android:id="@+id/list"
