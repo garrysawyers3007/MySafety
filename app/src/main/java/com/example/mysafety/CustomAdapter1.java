@@ -32,6 +32,9 @@ public class CustomAdapter1 extends ArrayAdapter<MyComplaint> {
         TextView date=listitemview.findViewById(R.id.date1);
         date.setText(myComplaint.getDate());
 
+        TextView department=listitemview.findViewById(R.id.mydepartment);
+        department.setText(myComplaint.getDepartment());
+
         TextView complaint=listitemview.findViewById(R.id.complaint1);
         complaint.setText(myComplaint.getComplaint());
 

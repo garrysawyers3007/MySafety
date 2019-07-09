@@ -31,6 +31,7 @@ public class CustomAdapter extends ArrayAdapter<Details> {
         TextView complaint=listitemview.findViewById(R.id.complaint);
         complaint.setText(details.getComplaint());
 
+
         return listitemview;
     }
 }

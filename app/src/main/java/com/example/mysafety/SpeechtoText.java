@@ -51,9 +51,10 @@ public class SpeechtoText extends AppCompatActivity {
     private final int REQ_IMAGE_CAPTURE=1;
     private final int REQ_PHOTO_PICKER=2;
     Button next,photo,gallery;
-    static AlertDialog.Builder dialog;
+    static AlertDialog.Builder dialog,options;
     FirebaseFirestore db;
     FirebaseStorage firebaseStorage;
+    String department;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,7 @@ public class SpeechtoText extends AppCompatActivity {
         next=findViewById(R.id.next);
         db=FirebaseFirestore.getInstance();
         firebaseStorage=FirebaseStorage.getInstance();
+        department="";
 
         btnSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,32 +79,17 @@ public class SpeechtoText extends AppCompatActivity {
         photo=findViewById(R.id.photo);
         gallery=findViewById(R.id.gallery);
 
-        dialog = new AlertDialog.Builder(this);
-        dialog.setMessage("Any other complaint?").setCancelable(true);
+        final String[] Options={"Electrical","Instrumentation","Mechanical","General"};
 
-        dialog.setPositiveButton("Yes",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        addComplaint(txtSpeechInput.getText().toString().trim());
-                        txtSpeechInput.setText("");
-                        dialog.cancel();
-                    }
-                });
-
-        dialog.setNegativeButton("No",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent=new Intent(SpeechtoText.this,MainPage.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        addComplaint(txtSpeechInput.getText().toString().trim());
-                        txtSpeechInput.setText("");
-                        dialog.cancel();
-                        finish();
-                    }
-                });
+        options=new AlertDialog.Builder(this);
+        options.setTitle("Choose a category").setCancelable(true);
+        options.setItems(Options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                department=Options[which];
+                showDialog();
+            }
+        });
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +97,7 @@ public class SpeechtoText extends AppCompatActivity {
                 if(txtSpeechInput.getText().toString().isEmpty())
                     Toast.makeText(getApplicationContext(),"No text entered",Toast.LENGTH_SHORT).show();
                 else
-                dialog.show();
+                options.show();
             }
         });
 
@@ -232,6 +219,36 @@ public class SpeechtoText extends AppCompatActivity {
         }
     }
 
+    public void showDialog(){
+        dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("Any other complaint?").setCancelable(true);
+
+        dialog.setPositiveButton("Yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        addComplaint(txtSpeechInput.getText().toString().trim());
+                        txtSpeechInput.setText("");
+                        dialog.cancel();
+                    }
+                });
+
+        dialog.setNegativeButton("No",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent=new Intent(SpeechtoText.this,MainPage.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        addComplaint(txtSpeechInput.getText().toString().trim());
+                        txtSpeechInput.setText("");
+                        dialog.cancel();
+                        finish();
+                    }
+                });
+        dialog.show();
+    }
+
     public void addComplaint(String complaint){
         TimeZone tz=TimeZone.getTimeZone("Asia/Kolkata");
         Calendar calendar=Calendar.getInstance(tz);
@@ -250,6 +267,7 @@ public class SpeechtoText extends AppCompatActivity {
         details.put("Date",strDate);
         details.put("Complaint",complaint);
         details.put("Time",finaldate);
+        details.put("Department",department);
 
         db.collection(getString(R.string.complaint)).document(finaldate)
                 .set(details, SetOptions.merge())

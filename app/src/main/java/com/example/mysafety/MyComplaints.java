@@ -56,7 +56,7 @@ public class MyComplaints extends AppCompatActivity {
                         List<MyComplaint> myComplaints=new ArrayList<>();
                         if(task.isSuccessful()){
                             for(QueryDocumentSnapshot document: task.getResult()){
-                                MyComplaint myComplaint=new MyComplaint(document.getString("Date"),document.getString("Complaint"),document.getString("Time"));
+                                MyComplaint myComplaint=new MyComplaint(document.getString("Date"),document.getString("Complaint"),document.getString("Time"),document.getString("Department"));
                                 myComplaints.add(myComplaint);
                             }
                             customAdapter1 = new CustomAdapter1(getApplicationContext(),myComplaints);

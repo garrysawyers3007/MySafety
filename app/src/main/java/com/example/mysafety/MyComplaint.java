@@ -3,14 +3,17 @@ package com.example.mysafety;
 public class MyComplaint {
     private String date;
     private String complaint;
-    String time;
+    private String time;
+    private String department;
+
 
     public MyComplaint(){}
 
-    public MyComplaint(String date, String complaint, String time) {
+    public MyComplaint(String date, String complaint, String time,String department) {
         this.date = date;
         this.complaint = complaint;
         this.time=time;
+        this.department=department;
     }
 
     public String getDate() {
@@ -23,5 +26,9 @@ public class MyComplaint {
 
     public String getTime() {
         return time;
+    }
+
+    public String getDepartment() {
+        return department;
     }
 }
