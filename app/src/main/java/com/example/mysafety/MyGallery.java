@@ -51,9 +51,9 @@ public class MyGallery extends AppCompatActivity implements DisplayImage.OnFragm
         gridView=findViewById(R.id.mygridview);
 
         SharedPreferences sharedPreferences=this.getSharedPreferences("Userdetails",MODE_PRIVATE);
-        String user=sharedPreferences.getString("User","");
+        String user=sharedPreferences.getString("User","");//getting value fron shared preference which was stored while logging in
 
-        db.collection("Images").whereEqualTo("User",user).get()
+        db.collection("Images").whereEqualTo("User",user).get()//querying in firebase by username
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {

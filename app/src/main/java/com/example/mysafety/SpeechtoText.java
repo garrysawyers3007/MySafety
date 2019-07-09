@@ -62,7 +62,7 @@ public class SpeechtoText extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_speechto_text);
 
-        txtSpeechInput = (EditText) findViewById(R.id.txtSpeechInput);
+        txtSpeechInput = (EditText) findViewById(R.id.txtSpeechInput);//edittext to write complaint
         btnSpeak = (ImageButton) findViewById(R.id.btnSpeak);
         next=findViewById(R.id.next);
         db=FirebaseFirestore.getInstance();
@@ -90,7 +90,7 @@ public class SpeechtoText extends AppCompatActivity {
                 department=Options[which];
                 showDialog();
             }
-        });
+        });//dialog to show options for department
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,7 +129,7 @@ public class SpeechtoText extends AppCompatActivity {
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
                 getString(R.string.speech_prompt));
         try {
-            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
+            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);//starting the speechtotext activity
         } catch (ActivityNotFoundException a) {
             Toast.makeText(getApplicationContext(),
                     getString(R.string.speech_not_supported),
@@ -148,20 +148,20 @@ public class SpeechtoText extends AppCompatActivity {
 
         String strDate = mdformat.format(calendar.getTime());
         String strTime=timeformat.format(calendar.getTime());
-        String finaldate=strDate+" "+strTime;
+        String finaldate=strDate+" "+strTime;//storing current date and time in finaldate
 
         switch (requestCode) {
-            case REQ_CODE_SPEECH_INPUT: {
+            case REQ_CODE_SPEECH_INPUT: {//for voice to text activity
                 if (resultCode == RESULT_OK && null != data) {
 
                     ArrayList<String> result = data
-                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    txtSpeechInput.setText(result.get(0));
+                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);//getting text from voice input
+                    txtSpeechInput.setText(result.get(0));//storing it in the edittext
                 }
                 break;
             }
 
-            case REQ_IMAGE_CAPTURE:{
+            case REQ_IMAGE_CAPTURE:{//for camera activity
                 if (resultCode == RESULT_OK) {
                     Bundle extras = data.getExtras();
                     Bitmap imageBitmap = (Bitmap) extras.get("data");
@@ -185,12 +185,12 @@ public class SpeechtoText extends AppCompatActivity {
                     }
                     Log.d("TAG",""+imageBitmap);
                     try{
-                    Uri imageuri=getImageUri(this,imageBitmap);
+                    Uri imageuri=getImageUri(this,imageBitmap);//getting image URI of image clicked
                     StorageReference storageReference=firebaseStorage.getReference().child("MySafety");
                     String path=finaldate.trim()+" "+imageuri.getLastPathSegment().trim();
 
                         StorageReference childreference = storageReference.child(path);
-                        childreference.putFile(imageuri);
+                        childreference.putFile(imageuri);//storing image in firebase storage
                         addPhoto(imageuri.getLastPathSegment(),finaldate);
                         Toast.makeText(SpeechtoText.this, "Photo Successfully Uploaded", Toast.LENGTH_SHORT).show();
                     }catch (NullPointerException e){
@@ -201,7 +201,7 @@ public class SpeechtoText extends AppCompatActivity {
                 break;
             }
 
-            case REQ_PHOTO_PICKER:{
+            case REQ_PHOTO_PICKER:{//for photo picker
                 if(resultCode==RESULT_OK) {
                     Uri imageuri = data.getData();
                     StorageReference storageReference = firebaseStorage.getReference().child("MySafety");
@@ -314,7 +314,7 @@ public class SpeechtoText extends AppCompatActivity {
                 db.collection("Images").document(finaldate)
                         .set(details,SetOptions.merge());
             }
-        });
+        });//storing photo related details in firebase
 
         alert.show();
         return;
@@ -325,7 +325,7 @@ public class SpeechtoText extends AppCompatActivity {
 
         if (pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {//checking if phone has camera start the activity for getting picture
                 startActivityForResult(takePictureIntent, REQ_IMAGE_CAPTURE);
             }
         }
@@ -334,7 +334,7 @@ public class SpeechtoText extends AppCompatActivity {
     }
 
 
-    private Uri getImageUri(Context context, Bitmap inImage) {
+    private Uri getImageUri(Context context, Bitmap inImage) {//obtaining image uri from its bitmap
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), inImage, "Title", null);

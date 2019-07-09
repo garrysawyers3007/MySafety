@@ -61,7 +61,9 @@ public class SignUp extends AppCompatActivity {
                 SharedPreferences.Editor editor=sharedPreferences.edit();
                 editor.putString("User",email);
                 editor.apply();
+
                 email=email.trim()+"@mysafety.com";
+
                 firebasecreateuser();
             }
         });
@@ -87,7 +89,7 @@ public class SignUp extends AppCompatActivity {
 
 
                     }
-                });
+                });//creating user and subsequently logging in
     }
 
 }

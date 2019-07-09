@@ -19,7 +19,7 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(new Intent(SplashActivity.this,MainActivity.class));
                 finish();
             }
-        },3000);
+        },2000);//the splash activity(first screen that appears when the app is opened) being displayed for 2 seconds
 
     }
 }

@@ -48,7 +48,7 @@ public class MyComplaints extends AppCompatActivity {
         SharedPreferences sharedPreferences=this.getSharedPreferences("Userdetails",MODE_PRIVATE);
         String user=sharedPreferences.getString("User","");
 
-        db.collection(getString(R.string.complaint)).whereEqualTo("User",user).get()
+        db.collection(getString(R.string.complaint)).whereEqualTo("User",user).get()//querying according to username in firebase
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 
                     @Override
@@ -78,7 +78,7 @@ public class MyComplaints extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
                 MyComplaint myComplaint=customAdapter1.getItem(position);
-                buildDialog(myComplaint);
+                buildDialog(myComplaint);//building a dialog to ask user whether to delete when the item is pressed for long time
                 return true;
             }
         });
@@ -103,7 +103,7 @@ public class MyComplaints extends AppCompatActivity {
                         Log.d("TAG",""+myComplaint.getTime());
                         dialog.cancel();
                     }
-                });
+                });//Setting attributes and functionalities for the dialog buttons
         builder.show();
     }
 
@@ -125,7 +125,7 @@ public class MyComplaints extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         Log.w("TAG", "Error deleting document", e);
                     }
-                });
+                });//deleting the data as per the item selected by the user
 
     }
 }

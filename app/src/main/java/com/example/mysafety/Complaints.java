@@ -18,9 +18,9 @@ public class Complaints extends AppCompatActivity implements Categories.OnFragme
 
         ViewPager viewPager=(ViewPager)findViewById(R.id.viewpager);
         SimpleFragmentPagerAdapter adapter = new SimpleFragmentPagerAdapter(getSupportFragmentManager(),getApplicationContext());
-        viewPager.setAdapter(adapter);
+        viewPager.setAdapter(adapter);//Setting viewpager for navigating between tabs by swiping
         TabLayout tabLayout=(TabLayout)findViewById(R.id.sliding_tabs);
-        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);//tablayout for tabs
 
     }
 

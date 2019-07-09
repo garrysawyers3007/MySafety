@@ -92,7 +92,7 @@ public class Login extends AppCompatActivity {
 
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+        startActivityForResult(signInIntent, RC_SIGN_IN);//starting activity for google sign in(google accounts options)
     }
 
     @Override
@@ -110,13 +110,12 @@ public class Login extends AppCompatActivity {
                 SharedPreferences sharedPreferences=this.getSharedPreferences("Userdetails",MODE_PRIVATE);
                 SharedPreferences.Editor editor=sharedPreferences.edit();
                 editor.putString("User",account.getDisplayName());
-                editor.apply();
+                editor.apply();//Storing username for storing in database
 
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w("TAG", "Google sign in failed", e);
                 Toast.makeText(Login.this,"Error",Toast.LENGTH_SHORT).show();
-                // ...
             }
         }
     }
@@ -133,11 +132,9 @@ public class Login extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("TAG", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("TAG", "signInWithCredential:failure", task.getException());
-                            //updateUI(null);
                         }
 
                         // ...

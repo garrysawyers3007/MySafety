@@ -107,7 +107,7 @@ public class Categories extends Fragment {
             public void onFailure(@NonNull Exception e) {
                 Log.w("TAG","Error in getting documnets");
             }
-        });
+        });//Displaying complaints sorted by department name as per the tab opened currently
 
         return view;
     }

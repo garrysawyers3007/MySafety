@@ -12,13 +12,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button complaints=findViewById(R.id.complaints);
+        Button complaints=findViewById(R.id.complaints);//Connecting button object with it's xml element
         complaints.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,Complaints.class));
+                startActivity(new Intent(MainActivity.this,Complaints.class));//opening complaints activity
             }
-        });
+        });//Adding onClick listener to perform action when button is clicked
 
         Button login=findViewById(R.id.login);
         login.setOnClickListener(new View.OnClickListener() {

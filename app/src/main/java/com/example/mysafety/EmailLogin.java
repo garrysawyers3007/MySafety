@@ -62,7 +62,7 @@ public class EmailLogin extends AppCompatActivity {
             public void onClick(View v) {
                 email=memail.getText().toString();
                 email=email.trim();
-                password=mpassword.getText().toString();
+                password=mpassword.getText().toString();//getting strings from the edit text to perform options accordingly
 
                 if(email.trim().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Enter email", Toast.LENGTH_SHORT).show();
@@ -77,10 +77,10 @@ public class EmailLogin extends AppCompatActivity {
                 editor.putString("User",email);
                 editor.apply();
 
-                email=email.trim()+"@mysafety.com";
+                email=email.trim()+"@mysafety.com";//adding fake domain to store user in firebase
                 FirebaseAuthWithEmail();
             }
-        });
+        });//dealing with all cases when user clicks login button
 
         forgotpasswd.setOnClickListener(new View.OnClickListener() {
             @Override

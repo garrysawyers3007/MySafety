@@ -75,15 +75,16 @@ public class MainPage extends AppCompatActivity {
                 SharedPreferences sharedPreferences=getSharedPreferences("Userdetails",MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
-                //clears out the user data of the application
+                //clears out the user data of the application in shared preference when the user logs out
                 editor.commit();
 
-                FirebaseAuth.getInstance().signOut();
+                FirebaseAuth.getInstance().signOut();//signing out from firebase
+
                 Intent intent=new Intent(MainPage.this,MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
-        });
+        });// Signing out the user
     }
 
 

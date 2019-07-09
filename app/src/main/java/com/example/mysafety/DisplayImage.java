@@ -100,7 +100,7 @@ public class DisplayImage extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        Label.setText(documentSnapshot.getString("Label"));
+                        Label.setText(documentSnapshot.getString("Label"));//Displaying the label retrieved from firebase above the photo
                     }
                 });
 

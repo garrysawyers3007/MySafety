@@ -51,7 +51,7 @@ public class Gallery extends AppCompatActivity implements DisplayImage.OnFragmen
         NoImage.setVisibility(View.GONE);
 
         gridView=findViewById(R.id.gridview);
-        gridView.setVisibility(View.VISIBLE);
+        gridView.setVisibility(View.VISIBLE);//gridview to display images
 
 
         db.collection("Images").get()
@@ -75,7 +75,7 @@ public class Gallery extends AppCompatActivity implements DisplayImage.OnFragmen
                 Log.w("TAG","Error in getting documnets");
                 Toast.makeText(Gallery.this,"Error Loading Photos",Toast.LENGTH_SHORT).show();
             }
-        });
+        });//Getting images to be displayed in gridview and setting them in the gridview
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -97,7 +97,7 @@ public class Gallery extends AppCompatActivity implements DisplayImage.OnFragmen
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
-        });
+        });//Displaying enlarged image on clicking every element
 
     }
 
